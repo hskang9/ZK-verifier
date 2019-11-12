@@ -95,12 +95,6 @@ const PTZX: usize = 4;
 const PTZY: usize = 5;
 
 
-
-fn get_field_modulus() -> U256 {
-    let FIELD_MODULUS: U256 = U256::from(&b"0x30644e72e131a029b85045b68181585d97816a916871ca8d3c208c16d87cfd47"[..]);
-    return FIELD_MODULUS;
-}
-
 /// get all constants for calculation
 fn get_constants() -> (U256, U256, U256) {
     let FIELD_MODULUS: U256 = U256::from_dec_str("30644e72e131a029b85045b68181585d97816a916871ca8d3c208c16d87cfd47").expect("p to be the field modulus");
