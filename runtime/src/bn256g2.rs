@@ -1,5 +1,4 @@
-//// Pairing library from zokrates verifier contract
-
+/// G2 point arithmetic library kept in jacobian format
 use rstd::prelude::*;
 use primitives::{U256};
 
@@ -94,12 +93,13 @@ const PTYY: usize = 3;
 const PTZX: usize = 4;
 const PTZY: usize = 5;
 
-21888242871839275222246405745257275088696311157297823662689037894645226208583
+
 /// get all constants for calculation
 fn get_constants() -> (U256, U256, U256) {
-    let FIELD_MODULUS: U256 = U256::from(&b"30644e72e131a029b85045b68181585d97816a916871ca8d3c208c16d87cfd47"[..]);
-    let TWISTBX: U256 = U256::from(&b"2b149d40ceb8aaae81be18991be06ac3b5b4c5e559dbefa33267e6dc24a138e5"[..]);
-    let TWISTBY: U256 = U256::from(&b"9713b03af0fed4cd2cafadeed8fdf4a74fa084e52d1852e4a2bd0685c315d2"[..]);
+    // Field modulus 0x30644e72e131a029b85045b68181585d97816a916871ca8d3c208c16d87cfd47
+    let FIELD_MODULUS: U256 = U256::from_dec_str("21888242871839275222246405745257275088696311157297823662689037894645226208583").expect("p to be the field modulus");
+    let TWISTBX: U256 = U256::from_dec_str("19485874751759354771024239261021720505790618469301721065564631296452457478373").expect("p to be TWISTBX");
+    let TWISTBY: U256 = U256::from_dec_str("266929791119991161246907387137283842545076965332900288569378510910307636690").expect("p to be TWISTBY");
 
     return (FIELD_MODULUS, TWISTBX, TWISTBY);
 }
