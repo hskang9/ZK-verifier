@@ -22,28 +22,28 @@ pub fn ECTwistAdd(pt1xx: U256, pt1xy: U256, pt1yx: U256, pt1yy: U256, pt2xx: U25
     // Get constants
     let (FIELD_MODULUS, TWISTBX, TWISTBY) = get_constants();
 
-    if (pt1xx == U256::from(0) && pt1xy == U256::from(0) && pt1yx == U256::from(0) && pt1yy == U256::from(0)) {
-        if(!(pt2xx == U256::from(0) && pt2xy == U256::from(0) && pt2yx == U256::from(0) && pt2yy == U256::from(0))) {
-            if(!_isOnCurve(pt2xx, pt2xy, pt2yx, pt2yy, FIELD_MODULUS, TWISTBX, TWISTBY)) {
+    if pt1xx == U256::from(0) && pt1xy == U256::from(0) && pt1yx == U256::from(0) && pt1yy == U256::from(0) {
+        if !(pt2xx == U256::from(0) && pt2xy == U256::from(0) && pt2yx == U256::from(0) && pt2yy == U256::from(0)) {
+            if !_isOnCurve(pt2xx, pt2xy, pt2yx, pt2yy, FIELD_MODULUS, TWISTBX, TWISTBY) {
                 // replace solidity's assert with returning error value
                 return(U256::from(1), U256::from(1), U256::from(1), U256::from(1));    
             }
             return (pt2xx, pt2xy, pt2yx, pt2yy);
         }
-    } else if (pt2xx== U256::from(0) && pt2xy == U256::from(0) && pt2yx == U256::from(0) && pt2yy == U256::from(0)) {
-        if(!_isOnCurve(pt1xx, pt1xy, pt1yx, pt1yy, FIELD_MODULUS, TWISTBX, TWISTBY)) {
+    } else if pt2xx== U256::from(0) && pt2xy == U256::from(0) && pt2yx == U256::from(0) && pt2yy == U256::from(0) {
+        if !_isOnCurve(pt1xx, pt1xy, pt1yx, pt1yy, FIELD_MODULUS, TWISTBX, TWISTBY) {
             // replace solidity's assert with returning error value
             return(U256::from(1), U256::from(1), U256::from(1), U256::from(1));
         }
         return (pt1xx, pt1xy, pt1yx, pt1yy);
     } 
 
-    if(!_isOnCurve(pt1xx, pt1xy, pt1yx, pt1yy, FIELD_MODULUS, TWISTBX, TWISTBY)) {
+    if !_isOnCurve(pt1xx, pt1xy, pt1yx, pt1yy, FIELD_MODULUS, TWISTBX, TWISTBY) {
         // replace solidity's assert with returning error value
         return(U256::from(1), U256::from(1), U256::from(1), U256::from(1));
     }
 
-    if(!_isOnCurve(pt2xx, pt2xy, pt2yx, pt2yy, FIELD_MODULUS, TWISTBX, TWISTBY)) {
+    if !_isOnCurve(pt2xx, pt2xy, pt2yx, pt2yy, FIELD_MODULUS, TWISTBX, TWISTBY) {
         // replace solidity's assert with returning error value
         return(U256::from(1), U256::from(1), U256::from(1), U256::from(1));
     }
@@ -69,12 +69,12 @@ pub fn ECTwistMul(s: U256, mut pt1xx: U256, pt1xy: U256, mut pt1yx: U256, pt1yy:
     let (FIELD_MODULUS, TWISTBX, TWISTBY) = get_constants();
     let mut pt1zx: U256 = U256::from(1);
 
-    if (pt1xx == U256::from(0) && pt1xy == U256::from(0) && pt1yx == U256::from(0) && pt1yy == U256::from(0)) {
+    if pt1xx == U256::from(0) && pt1xy == U256::from(0) && pt1yx == U256::from(0) && pt1yy == U256::from(0) {
         pt1xx = U256::from(1);
         pt1yx = U256::from(1);
         pt1zx = U256::from(0);
     } else {
-        if(!_isOnCurve(pt1xx, pt1xy, pt1yx, pt1yy, FIELD_MODULUS, TWISTBX, TWISTBY)) {
+        if !_isOnCurve(pt1xx, pt1xy, pt1yx, pt1yy, FIELD_MODULUS, TWISTBX, TWISTBY) {
             // replace solidity's assert with returning error value
             return(U256::from(1), U256::from(1), U256::from(1), U256::from(1));
         }
@@ -97,9 +97,9 @@ const PTZY: usize = 5;
 
 /// get all constants for calculation
 fn get_constants() -> (U256, U256, U256) {
-    let FIELD_MODULUS: U256 = U256::from_dec_str("30644e72e131a029b85045b68181585d97816a916871ca8d3c208c16d87cfd47").expect("p to be the field modulus");
-    let TWISTBX: U256 = U256::from_dec_str("2b149d40ceb8aaae81be18991be06ac3b5b4c5e559dbefa33267e6dc24a138e5").expect("p to be TWISTBX");
-    let TWISTBY: U256 = U256::from_dec_str("9713b03af0fed4cd2cafadeed8fdf4a74fa084e52d1852e4a2bd0685c315d2").expect("p to be TWISTBY");
+    let FIELD_MODULUS: U256 = U256::from(&b"0x30644e72e131a029b85045b68181585d97816a916871ca8d3c208c16d87cfd47"[..]);
+    let TWISTBX: U256 = U256::from_dec_str(&b"2b149d40ceb8aaae81be18991be06ac3b5b4c5e559dbefa33267e6dc24a138e5"[..]);
+    let TWISTBY: U256 = U256::from_dec_str(&b"9713b03af0fed4cd2cafadeed8fdf4a74fa084e52d1852e4a2bd0685c315d2"[..]);
 
     return (FIELD_MODULUS, TWISTBX, TWISTBY);
 }
@@ -310,7 +310,6 @@ fn _ECTwistDoubleJacobian(
     mut pt1xx: U256, mut pt1xy: U256, mut pt1yx: U256, mut pt1yy: U256, mut pt1zx: U256, mut pt1zy: U256,
     field_modulus: U256
     ) -> (U256, U256, U256, U256, U256, U256) {
-        /// Rust does not have multiple variable assignment yet. fuck.
         let three_x = _fq2_muc(pt1xx, pt1xy, 3, field_modulus);            // 3 * x
         let mut pt2xx = three_x.0;  
         let mut pt2xy = three_x.1;
@@ -382,7 +381,7 @@ fn _ECTwistMulJacobian(
 ) -> Vec<U256> {
     let mut pt2: Vec<U256> = vec!{U256::from(0),U256::from(0), U256::from(0), U256::from(0), U256::from(0), U256::from(0)};
     while d != U256::from(0) {
-        if((d & U256::from(1)) != U256::from(0)) {
+        if (d & U256::from(1)) != U256::from(0) {
             pt2 = _ECTwistAddJacobian(
                 pt2[PTXX], pt2[PTXY], pt2[PTYX], pt2[PTYY], pt2[PTZX], pt2[PTZY],
                 pt1xx, pt1xy, pt1yx, pt1yy, pt1zx, pt1zy,

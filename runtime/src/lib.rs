@@ -64,6 +64,7 @@ pub type DigestItem = generic::DigestItem<Hash>;
 /// Used for the module template in `./template.rs`
 mod template;
 mod pairing;
+mod bn256g2;
 
 
 

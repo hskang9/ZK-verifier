@@ -10,7 +10,7 @@
 
 use support::{decl_module, decl_storage, decl_event, dispatch::Result};
 use system::ensure_signed;
-use crate::pairing;
+use crate::bn256g2;
 
 /// The module's configuration trait.
 pub trait Trait: system::Trait {
