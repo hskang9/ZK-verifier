@@ -98,8 +98,8 @@ const PTZY: usize = 5;
 /// get all constants for calculation
 fn get_constants() -> (U256, U256, U256) {
     let FIELD_MODULUS: U256 = U256::from(&b"0x30644e72e131a029b85045b68181585d97816a916871ca8d3c208c16d87cfd47"[..]);
-    let TWISTBX: U256 = U256::from_dec_str(&b"2b149d40ceb8aaae81be18991be06ac3b5b4c5e559dbefa33267e6dc24a138e5"[..]);
-    let TWISTBY: U256 = U256::from_dec_str(&b"9713b03af0fed4cd2cafadeed8fdf4a74fa084e52d1852e4a2bd0685c315d2"[..]);
+    let TWISTBX: U256 = U256::from(&b"2b149d40ceb8aaae81be18991be06ac3b5b4c5e559dbefa33267e6dc24a138e5"[..]);
+    let TWISTBY: U256 = U256::from(&b"9713b03af0fed4cd2cafadeed8fdf4a74fa084e52d1852e4a2bd0685c315d2"[..]);
 
     return (FIELD_MODULUS, TWISTBX, TWISTBY);
 }
