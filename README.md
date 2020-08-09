@@ -1,6 +1,6 @@
-# Substrate Node Template
+# ZK-verifier
 
-A new SRML-based Substrate node, ready for hacking.
+zero knowlege proof verification in substrate runtime
 
 ## Build
 
